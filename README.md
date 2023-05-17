@@ -25,6 +25,15 @@
 │     │   │   ├──sample.npz                     # 测试数据
 │     │   │   ├──maxwellnet_2023-05-17 02-00-48.log   # 训练日志
 │     │   │   ├──tm_result.png            # 测试可视化图片
+│     ├── scripts                             # 脚本文件
+│     │   ├── run_eval.sh                     # 验证脚本
+│     │   └── run_standalone_train.sh         # 单机训练脚本
+│     ├── src                                 # 模型定义源码目录
+│     │   ├── UNet.py                        # 骨干网络
+│     │   ├── MaxwellNet.py                   # 模型定义
+│     │   └── Dataset.py                      # 数据集处理定义
+│     └── train.py                            # 训练脚本
+│     ├── eval.py                             # 精度验证脚本，可视化模型效果
 ```
 # 训练
 ```shell
