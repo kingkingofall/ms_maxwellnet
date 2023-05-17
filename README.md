@@ -1,6 +1,6 @@
 # ms_maxwellnet
 # 昇腾AI创新大赛2023-昇思赛道-算法创新赛题
-# 基于mindspore复现ms_maxwellnet
+# 基于mindspore复现ms_maxwellnet, mindspore=1.10
 # 目录结构
 ```shell
 ├── ms_maxwellnet                              # 官方支持模型
@@ -25,4 +25,12 @@
 │     │   │   ├──sample.npz                     # 测试数据
 │     │   │   ├──maxwellnet_2023-05-17 02-00-48.log   # 训练日志
 │     │   │   ├──tm_result.png            # 测试可视化图片
+```
+# 训练
+```shell
+bash ./scripts/run_standalone_train.sh
+```
+# 验证
+```shell
+bash ./scripts/run_eval.sh
 ```
