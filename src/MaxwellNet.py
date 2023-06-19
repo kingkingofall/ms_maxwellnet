@@ -3,7 +3,7 @@
 import mindspore as ms
 from mindspore import nn, Tensor
 from .UNet import UNet
-import mindspore.ops as ops
+from mindspore import ops
 import math
 import numpy as np
 
@@ -151,7 +151,7 @@ class MaxwellNet(nn.Cell):
             epsillon = ms.numpy.where(epsillon > 1.0, epsillon, ms.Tensor(
                 [1], dtype=ms.float32))
             x = self.model(scat_pot)
-            total = ms.ops.concat((x[:, 0:1, :, :] + 1, x[:, 1:2, :, :]), 1)
+            total = ops.concat((x[:, 0:1, :, :] + 1, x[:, 1:2, :, :]), 1)
 
             ey = self.complex_multiplication(total[:, 0:2, :, :],
                                              self.fast[:, :, self.pad:-self.pad:, self.pad:-self.pad:])
@@ -184,7 +184,7 @@ class MaxwellNet(nn.Cell):
                                      ms.Tensor([1], dtype=ms.float32))
 
             x = self.model(scat_pot)
-            total = ms.ops.concat((x[:, 0:1, :, :] + 1, x[:, 1:4, :, :]), 1)
+            total = ops.concat((x[:, 0:1, :, :] + 1, x[:, 1:4, :, :]), 1)
 
             ex = self.complex_multiplication(
                 total[:, 0:2, :, :], self.fast[:, :, self.pad:-self.pad:, self.pad:-self.pad:])
@@ -226,20 +226,20 @@ class MaxwellNet(nn.Cell):
                     (epsillon_z * ez_s[:, :, self.pad:-
                      self.pad:, self.pad:-self.pad:])
 
-            diff = ms.ops.concat((diff_x, diff_z), 1)
+            diff = ops.concat((diff_x, diff_z), 1)
 
         return diff, total
 
     def complex_multiplication(self, a, b):
         # print(a.shape, b.shape)
-        r_p = ms.ops.mul(a[:, 0:1, :, :], b[:, 0:1, :, :]) - \
-            ms.ops.mul(a[:, 1:2, :, :], b[:, 1:2, :, :])
-        i_p = ms.ops.mul(a[:, 0:1, :, :], b[:, 1:2, :, :]) + \
-            ms.ops.mul(a[:, 1:2, :, :], b[:, 0:1, :, :])
-        return ms.ops.concat((r_p, i_p), 1)
+        r_p = ops.mul(a[:, 0:1, :, :], b[:, 0:1, :, :]) - \
+            ops.mul(a[:, 1:2, :, :], b[:, 1:2, :, :])
+        i_p = ops.mul(a[:, 0:1, :, :], b[:, 1:2, :, :]) + \
+            ops.mul(a[:, 1:2, :, :], b[:, 0:1, :, :])
+        return ops.concat((r_p, i_p), 1)
 
     def complex_conjugate(self, a):
-        return ms.ops.concat((-a[:, 1:2, :, :], a[:, 0:1, :, :]), 1)
+        return ops.concat((-a[:, 1:2, :, :], a[:, 0:1, :, :]), 1)
 
     def d_e_x(self, x):
         return ops.conv2d(x, self.gradient_e_x, padding=0, group=2)
