@@ -1,6 +1,7 @@
 # ms_maxwellnet
 # 昇腾AI创新大赛2023-昇思赛道-算法创新赛题
 # 基于mindspore复现ms_maxwellnet, mindspore=1.10
+# 支持GPU和Ascend硬件，默认使用Ascend
 # 目录结构
 ```shell
 ├── ms_maxwellnet                              # 官方支持模型
@@ -36,10 +37,17 @@
 │     ├── eval.py                             # 精度验证脚本，可视化模型效果
 ```
 # 训练
+## 在./ms_maxwellnet路径下运行
 ```shell
 bash ./scripts/run_standalone_train.sh
 ```
+## 训练文件不打印中间信息，训练信息单独作为日志文件存放在configs/spheric_te路径下存放。
 # 验证
+## 在./ms_maxwellnet路径下运行
 ```shell
 bash ./scripts/run_eval.sh
 ```
+## 生成te_result.png图片存放在configs/spheric_te路径下。
+
+# 对比
+figures/te_result.png为官方代码库基于pytorch实现的结果图片，用于与configs/spheric_te/te_result.png进行对比。
