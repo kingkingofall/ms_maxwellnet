@@ -1,6 +1,6 @@
 # Copyright (c) 2022 Joowon Lim, limjoowon@gmail.com
 import mindspore as ms
-import mindspore.ops as ops
+from mindspore import ops
 from src.MaxwellNet import MaxwellNet
 
 import numpy as np
@@ -13,7 +13,10 @@ import argparse
 
 
 def main(args):
-    ms.set_context( device_target="GPU")
+    # use GPU
+    # ms.set_context(device_target="GPU")
+    # use Ascend
+    ms.set_context(device_target="Ascend")
     specs_filename = os.path.join(
         os.getcwd(), args.directory, 'specs_maxwell.json')
     specs = json.load(open(specs_filename))
