@@ -2,7 +2,7 @@
 
 # import torch
 import mindspore as ms
-import mindspore.ops as ops
+from mindspore import ops
 from src.Dataset import LensDataset
 from mindspore.nn import piecewise_constant_lr
 from mindspore import set_seed
@@ -21,7 +21,10 @@ from datetime import datetime
 transpose = ops.Transpose()
 
 def main(directory, load_ckpt):
-    ms.set_context( device_target="GPU")
+    # use GPU
+    # ms.set_context(device_target="GPU")
+    # use Ascend
+    ms.set_context(device_target="Ascend")
     logging.basicConfig(level=logging.DEBUG,
                         format='%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s',
                         datefmt='%a, %d %b %Y %H:%M:%S',
@@ -162,7 +165,7 @@ class LossNet(ms.nn.Cell):
 
         (diff, total) = self.net(scat_pot_ms, ri_value_ms)
         l2 = diff.pow(2)
-        loss = ms.ops.mean(l2)
+        loss = ops.mean(l2)
         return loss
     
 def train(train_loader, train_net, optimizer, epoch, loss_train, mode, symmetry):
