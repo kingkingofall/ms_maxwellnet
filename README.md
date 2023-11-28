@@ -50,4 +50,10 @@ bash ./scripts/run_eval.sh
 ## 生成te_result.png图片存放在configs/spheric_te路径下。
 
 # 5.结果对比
-![image](figures/te_result.png)为官方代码库基于pytorch实现的结果图片，用于与![image](configs/spheric_te/te_result.png)进行对比。
+![image](figures/te_result.png)
+
+为官方代码库基于pytorch实现的结果图片，用于与
+
+![image](configs/spheric_te/te_result.png)
+
+进行对比。
